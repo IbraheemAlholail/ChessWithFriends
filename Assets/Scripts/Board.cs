@@ -65,8 +65,6 @@ public class Board : MonoBehaviour
                     //change the name of the tile to the file and rank
                     tile.name = ((char)(65 + i)).ToString() + (j + 1).ToString();
                     tile.layer = 11;
-                    //lock the transform so the tiles can't be moved
-
                 }
                 else
                 {
@@ -130,15 +128,13 @@ public class Board : MonoBehaviour
 
     public void placePieces()
     {
-        //scale all pieces down 10%. then give them a new box collider2d
+        //scale all pieces down 10%. 
         for (int i = 0; i < whitePieces.Length; i++)
         {
             whitePieces[i].transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
-            whitePieces[i].AddComponent<BoxCollider2D>();
-
             blackPieces[i].transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
-            blackPieces[i].AddComponent<BoxCollider2D>();
         }
+
 
 
         for (int i = 0; i < 8; i++)
@@ -173,15 +169,16 @@ public class Board : MonoBehaviour
 
     public void placePiece(GameObject piece, int rank , int file, string pieceName)
     {
-        //wait one second before placing the piece
-
         //instantiate the piece on the tile
         GameObject newPiece = Instantiate(piece, tiles[file, rank].transform.localPosition, Quaternion.identity, tiles[file, rank].transform);
         //set the z value to 1 so that the piece is on top of the tile
         newPiece.transform.localPosition = new Vector3(newPiece.transform.localPosition.x, newPiece.transform.localPosition.y, 1);
         //tag the piece with type of piece it is
         newPiece.tag = pieceName;
+        //set the layer of the piece to 10 so that it is on top of the tile
         newPiece.layer = 10;
+        //give the piece a box collider2D
+        newPiece.AddComponent<BoxCollider2D>(); 
     }
 
     public void testmove()
