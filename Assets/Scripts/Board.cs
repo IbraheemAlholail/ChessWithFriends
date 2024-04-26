@@ -26,6 +26,23 @@ public class Board : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        //if a pieces is the child of a tile, set the pieces position to the tile position
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (tiles[i, j].transform.childCount > 0)
+                {
+                    tiles[i, j].transform.GetChild(0).transform.position = tiles[i, j].transform.position;
+                    //set the z value to 1 so that the piece is on top of the tile
+                    tiles[i, j].transform.GetChild(0).transform.localPosition = new Vector3(tiles[i, j].transform.GetChild(0).transform.localPosition.x, tiles[i, j].transform.GetChild(0).transform.localPosition.y, 1);
+                }
+            }
+        }
+    }
+
     private void MakeBoard()
     {
         // Get the size of the chessBoarder
@@ -45,7 +62,8 @@ public class Board : MonoBehaviour
                     tile = Instantiate(whiteTile, transform);
                     tile.AddComponent<BoxCollider2D>();
                     tile.GetComponent<BoxCollider2D>().isTrigger = true;
-                    //lock the transform so the tiles can't be moved
+                    //change the name of the tile to the file and rank
+                    tile.name = ((char)(65 + i)).ToString() + (j + 1).ToString();
 
                 }
                 else
@@ -53,6 +71,8 @@ public class Board : MonoBehaviour
                     tile = Instantiate(blackTile, transform);
                     tile.AddComponent<BoxCollider2D>();
                     tile.GetComponent<BoxCollider2D>().isTrigger = true;
+                    //change the name of the tile to the file and rank
+                    tile.name = ((char)(65 + i)).ToString() + (j + 1).ToString();
 
                 }
 
@@ -158,12 +178,10 @@ public class Board : MonoBehaviour
         newPiece.tag = pieceName;
     }
 
-    public void movePiece(GameObject originalTile, GameObject newTile)
-    {
-    }
-
     public void testmove()
     {
+        //move the white pawn at A2 to A4
+        tiles[0, 1].transform.GetChild(0).transform.parent = tiles[0, 3].transform;
     }
 
 }
