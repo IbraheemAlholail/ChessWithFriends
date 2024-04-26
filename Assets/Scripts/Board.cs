@@ -88,6 +88,7 @@ public class Board : MonoBehaviour
             letter.GetComponent<TextMesh>().anchor = TextAnchor.MiddleCenter;
             letter.transform.localPosition = new Vector3(tiles[i, 0].transform.localPosition.x, tiles[i, 0].transform.localPosition.y - 1, 0);
             letter.transform.parent = legends.transform;
+            letter.name = ((char)(65 + i)).ToString();
 
             //make the numbers
             GameObject number = new GameObject();
@@ -99,6 +100,7 @@ public class Board : MonoBehaviour
             number.GetComponent<TextMesh>().anchor = TextAnchor.MiddleLeft;
             number.transform.localPosition = new Vector3(tiles[0, i].transform.localPosition.x - 1, tiles[0, i].transform.localPosition.y, 0);
             number.transform.parent = legends.transform;
+            number.name = (i + 1).ToString();
         }
     }
 
