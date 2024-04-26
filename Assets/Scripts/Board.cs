@@ -45,6 +45,7 @@ public class Board : MonoBehaviour
                     tile = Instantiate(whiteTile, transform);
                     tile.AddComponent<BoxCollider2D>();
                     tile.GetComponent<BoxCollider2D>().isTrigger = true;
+                    tile.layer = 11;
                     //lock the transform so the tiles can't be moved
 
                 }
@@ -53,6 +54,7 @@ public class Board : MonoBehaviour
                     tile = Instantiate(blackTile, transform);
                     tile.AddComponent<BoxCollider2D>();
                     tile.GetComponent<BoxCollider2D>().isTrigger = true;
+                    tile.layer = 11;
 
                 }
 
@@ -156,6 +158,7 @@ public class Board : MonoBehaviour
         newPiece.transform.localPosition = new Vector3(newPiece.transform.localPosition.x, newPiece.transform.localPosition.y, 1);
         //tag the piece with type of piece it is
         newPiece.tag = pieceName;
+        newPiece.layer = 10;
     }
 
     public void movePiece(GameObject originalTile, GameObject newTile)

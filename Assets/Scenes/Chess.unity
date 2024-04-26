@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 127630458}
   - component: {fileID: 127630457}
+  - component: {fileID: 127630459}
   m_Layer: 0
   m_Name: Board
   m_TagString: Board
@@ -186,6 +187,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &127630459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127630456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c9b706676f55e34ea2a15feba78f12a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  draggableLayers:
+    serializedVersion: 2
+    m_Bits: 1024
+  boardTileLayers:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1 &619690505
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,7 +264,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0}
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -279,7 +298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 882953492}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pieces
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +365,7 @@ GameObject:
   - component: {fileID: 1880507639}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
