@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class Board : MonoBehaviour
@@ -12,7 +13,7 @@ public class Board : MonoBehaviour
     public GameObject[,] tiles = new GameObject[8, 8]; 
     public GameObject[] whitePieces = new GameObject[6]; //array of objects, saved in this order: pawn, rook, knight, bishop, queen, king
     public GameObject[] blackPieces = new GameObject[6]; //array of objects, saved in this order: pawn, rook, knight, bishop, queen, king
-    private GameObject[,] pieces = new GameObject[8, 8]; //array of objects, saved in this order: pawn, rook, knight, bishop, queen, king
+    public Piece.PieceType pieceType;
     
 
 
@@ -20,7 +21,6 @@ public class Board : MonoBehaviour
     {
         MakeBoard();
         Invoke("placePieces", 1);
-        //wait 1 second then move 
         Invoke("testmove", 2);
         
 
@@ -139,46 +139,50 @@ public class Board : MonoBehaviour
 
         for (int i = 0; i < 8; i++)
         {
-            placePiece(whitePieces[0], 1, i, "White Pawn");
-            placePiece(blackPieces[0], 6, i, "Black Pawn");
+            //place the white pawns
+            placePiece(whitePieces[0], 1, i, Piece.PieceType.W_Pawn);
+            //place the black pawns
+            placePiece(blackPieces[0], 6, i, Piece.PieceType.B_Pawn);
         }
 
-        placePiece(whitePieces[1], 0, 0, "White Rook");
-        placePiece(whitePieces[1], 0, 7, "White Rook");
-        placePiece(blackPieces[1], 7, 0, "Black Rook");
-        placePiece(blackPieces[1], 7, 7, "Black Rook");
+        //place the white pieces
+        placePiece(whitePieces[1], 0, 0, Piece.PieceType.W_Rook);
+        placePiece(whitePieces[2], 0, 1, Piece.PieceType.W_Knight);
+        placePiece(whitePieces[3], 0, 2, Piece.PieceType.W_Bishop);
+        placePiece(whitePieces[4], 0, 3, Piece.PieceType.W_Queen);
+        placePiece(whitePieces[5], 0, 4, Piece.PieceType.W_King);
+        placePiece(whitePieces[3], 0, 5, Piece.PieceType.W_Bishop);
+        placePiece(whitePieces[2], 0, 6, Piece.PieceType.W_Knight);
+        placePiece(whitePieces[1], 0, 7, Piece.PieceType.W_Rook);
 
-        placePiece(whitePieces[2], 0, 1, "White Knight");
-        placePiece(whitePieces[2], 0, 6, "White Knight");
-        placePiece(blackPieces[2], 7, 1, "Black Knight");
-        placePiece(blackPieces[2], 7, 6, "Black Knight");
-
-        placePiece(whitePieces[3], 0, 2, "White Bishop");
-        placePiece(whitePieces[3], 0, 5, "White Bishop");
-        placePiece(blackPieces[3], 7, 2, "Black Bishop");
-        placePiece(blackPieces[3], 7, 5, "Black Bishop");
-
-        placePiece(whitePieces[4], 0, 3, "White Queen");
-        placePiece(blackPieces[4], 7, 4, "Black Queen");
-
-        placePiece(whitePieces[5], 0, 4, "White King");
-        placePiece(blackPieces[5], 7, 3, "Black King");
-
+        //place the black pieces
+        placePiece(blackPieces[1], 7, 0, Piece.PieceType.B_Rook);
+        placePiece(blackPieces[2], 7, 1, Piece.PieceType.B_Knight);
+        placePiece(blackPieces[3], 7, 2, Piece.PieceType.B_Bishop);
+        placePiece(blackPieces[4], 7, 3, Piece.PieceType.B_Queen);
+        placePiece(blackPieces[5], 7, 4, Piece.PieceType.B_King);
+        placePiece(blackPieces[3], 7, 5, Piece.PieceType.B_Bishop);
+        placePiece(blackPieces[2], 7, 6, Piece.PieceType.B_Knight);
+        placePiece(blackPieces[1], 7, 7, Piece.PieceType.B_Rook);
 
     }
 
-    public void placePiece(GameObject piece, int rank , int file, string pieceName)
+    public void placePiece(GameObject piece, int rank , int file, Piece.PieceType pieceType)
     {
         //instantiate the piece on the tile
         GameObject newPiece = Instantiate(piece, tiles[file, rank].transform.localPosition, Quaternion.identity, tiles[file, rank].transform);
         //set the z value to 1 so that the piece is on top of the tile
         newPiece.transform.localPosition = new Vector3(newPiece.transform.localPosition.x, newPiece.transform.localPosition.y, 1);
         //tag the piece with type of piece it is
-        newPiece.tag = pieceName;
+        newPiece.tag = pieceType.ToString().ToUpper();
         //set the layer of the piece to 10 so that it is on top of the tile
         newPiece.layer = 10;
         //give the piece a box collider2D
         newPiece.AddComponent<BoxCollider2D>(); 
+        //give the piece the piece script
+        newPiece.AddComponent<Piece>();
+        //set the type of the piece
+        newPiece.GetComponent<Piece>().type = pieceType;
     }
 
     public void testmove()
