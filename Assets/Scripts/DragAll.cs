@@ -9,15 +9,17 @@ public class DragAll : MonoBehaviour
     private Vector3 offset;
     [SerializeField] private LayerMask draggableLayers;
     [SerializeField] private LayerMask boardTileLayers;
+    [SerializeField] private float gridSize = 0.25f;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            //Mouse location compared to the camera and checks for draggable objects
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, float.PositiveInfinity, draggableLayers);
             if (hit)
             {
-                UnityEngine.Debug.Log("hit balls");
+                UnityEngine.Debug.Log("hit successful"); //debug for checking if the raycast is good
 
                 dragging = hit.transform;
                 offset = dragging.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -43,7 +45,7 @@ public class DragAll : MonoBehaviour
                 dragging.SetParent(tile.transform);
                 dragging.localPosition = new Vector3(0,0,1); // Center the piece on the tile
 
-                UnityEngine.Debug.Log("Piece dropped on tile: " + tile.name);
+                //UnityEngine.Debug.Log("Piece dropped on tile: " + tile.name);
             }
             else
             {
@@ -55,7 +57,6 @@ public class DragAll : MonoBehaviour
     // Snap a given position to the nearest grid position
     private Vector3 SnapToGrid(Vector3 position)
     {
-        float gridSize = 1.0f; // Adjust this according to your grid size
         float snappedX = Mathf.Round(position.x / gridSize) * gridSize;
         float snappedY = Mathf.Round(position.y / gridSize) * gridSize;
         return new Vector3(snappedX, snappedY, position.z);
