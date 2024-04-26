@@ -64,6 +64,8 @@ public class Board : MonoBehaviour
                     tile.GetComponent<BoxCollider2D>().isTrigger = true;
                     //change the name of the tile to the file and rank
                     tile.name = ((char)(65 + i)).ToString() + (j + 1).ToString();
+                    tile.layer = 11;
+                    //lock the transform so the tiles can't be moved
 
                 }
                 else
@@ -73,6 +75,7 @@ public class Board : MonoBehaviour
                     tile.GetComponent<BoxCollider2D>().isTrigger = true;
                     //change the name of the tile to the file and rank
                     tile.name = ((char)(65 + i)).ToString() + (j + 1).ToString();
+                    tile.layer = 11;
 
                 }
 
@@ -178,6 +181,7 @@ public class Board : MonoBehaviour
         newPiece.transform.localPosition = new Vector3(newPiece.transform.localPosition.x, newPiece.transform.localPosition.y, 1);
         //tag the piece with type of piece it is
         newPiece.tag = pieceName;
+        newPiece.layer = 10;
     }
 
     public void testmove()
