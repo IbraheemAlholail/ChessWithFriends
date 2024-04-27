@@ -17,11 +17,21 @@ public class DragAll : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, float.PositiveInfinity, draggableLayers);
             if (hit)
             {
+<<<<<<< Updated upstream
                 UnityEngine.Debug.Log("hit balls");
 
                 dragging = hit.transform;
                 offset = dragging.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+=======
+                dragging = hit.transform; // Start dragging
+                dragging.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -1);
+                offset = dragging.position - Camera.main.ScreenToWorldPoint(Input.mousePosition); // Calculate the offset
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning("No Piece found");
+>>>>>>> Stashed changes
             }
         }
         else if (Input.GetMouseButtonUp(0)) //stop dragging
@@ -37,18 +47,35 @@ public class DragAll : MonoBehaviour
             // Get the tile under the snapped position
             GameObject tile = GetTileAtPosition(snappedPosition);
 
-            if (tile != null)
+            if (tile != null && dragging != null)
             {
                 // Make the dragged piece a child of the tile
                 dragging.SetParent(tile.transform);
+<<<<<<< Updated upstream
                 dragging.localPosition = new Vector3(0,0,1); // Center the piece on the tile
 
                 UnityEngine.Debug.Log("Piece dropped on tile: " + tile.name);
+=======
+                dragging.localPosition = new Vector3(0, 0, 1); // Center the piece on the tile
+>>>>>>> Stashed changes
             }
-            else
+            else if(dragging != null && tile == null)
             {
                 UnityEngine.Debug.LogWarning("No tile found under dropped position.");
+            }else
+            {
+                UnityEngine.Debug.LogWarning("No piece to drop.");
             }
+<<<<<<< Updated upstream
+=======
+            dragging = null;            
+        }
+
+        if (dragging != null) //move object
+        {
+            dragging.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+
+>>>>>>> Stashed changes
         }
     }
 
