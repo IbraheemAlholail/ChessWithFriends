@@ -5,18 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - Board
-  - White Pawn
-  - White Rook
-  - White Knight
-  - White Bishop
-  - White Queen
-  - Black Pawn
-  - Black Rook
-  - Black Knight
-  - Black Bishop
-  - Black Queen
-  - Black King
-  - White King
+  - B_PAWN
+  - B_ROOK
+  - B_KNIGHT
+  - B_BISHOP
+  - B_KING
+  - B_QUEEN
+  - W_PAWN
+  - W_ROOK
+  - W_KNIGHT
+  - W_BISHOP
+  - W_KING
+  - W_QUEEN
   layers:
   - Default
   - TransparentFX
