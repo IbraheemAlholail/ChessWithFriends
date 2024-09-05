@@ -28,8 +28,6 @@ public class DragAll : MonoBehaviour
                 UnityEngine.Debug.Log("hit successful"); //debug for checking if the raycast is good
 
                 dragging = hit.transform;
-<<<<<<< Updated upstream
-=======
 
                 // Get the original tile before detaching
                 originalTile = dragging.parent != null ? dragging.parent.gameObject : null;
@@ -44,7 +42,6 @@ public class DragAll : MonoBehaviour
 
                 //center the piece on the mouse
                 dragging.position = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, -2);
->>>>>>> Stashed changes
                 offset = dragging.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             }
@@ -89,15 +86,12 @@ public class DragAll : MonoBehaviour
                 dragging = null;
                 originalTile = null; // Reset original tile
             }
-<<<<<<< Updated upstream
             else
             {
                 UnityEngine.Debug.LogWarning("No tile found under dropped position.");
             }
             dragging = null;            
         }
-=======
->>>>>>> Stashed changes
 
         if (dragging != null) //move object
         {
@@ -171,6 +165,5 @@ public class DragAll : MonoBehaviour
         }
         return null;
     }
-
     
-}
+
