@@ -85,17 +85,13 @@ public class DragAll : MonoBehaviour
                 }
                 dragging = null;
                 originalTile = null; // Reset original tile
-            }
-            else
-            {
-                UnityEngine.Debug.LogWarning("No tile found under dropped position.");
-            }
-            dragging = null;            
-        }
+        }          
+        
+
 
         if (dragging != null) //move object
         {
-            dragging.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset ;
+            dragging.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
 
             // Snap the ghost piece to the nearest grid position based on the mouse
             Vector3 ghostSnappedPosition = SnapToGrid(Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset);
@@ -165,5 +161,6 @@ public class DragAll : MonoBehaviour
         }
         return null;
     }
+}
     
 
